@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+  <app id="tvinput.hdmi1" type="tvin" version="1.0.0">HDMI 1</app>
+  <app id="tvinput.hdmi2" type="tvin" version="1.0.0">HDMI 2</app>
+  <app id="tvinput.hdmi3" type="tvin" version="1.0.0">HDMI 3 (ARC)</app>
+  <app id="tvinput.cvbs" type="tvin" version="1.0.0">AV</app>
+  <app id="tvinput.dtv" type="tvin" version="1.0.0">Live TV</app>
+  <app id="150902" type="appl" version="2.3.5">Mirror for Roku</app>
+  <app id="12" type="appl" version="5.0.98079409">Netflix</app>
+  <app id="50025" type="appl" version="2.1.20201113">Google Play Movies &amp; TV</app>
+  <app id="291097" type="appl" version="1.10.2020110200">Disney Plus</app>
+  <app id="27181" type="appl" version="4.51.216">Sky News</app>
+  <app id="151908" type="appl" version="2.9.42">The Roku Channel</app>
+  <app id="2213" type="appl" version="5.4.4">Roku Media Player</app>
+  <app id="19977" type="appl" version="2.7.16">Spotify Music</app>
+  <app id="259870" type="appl" version="1.4.8">Global TV</app>
+  <app id="837" type="appl" version="1.0.93000110">YouTube</app>
+  <app id="13" type="appl" version="11.4.2020092816">Prime Video</app>
+</apps>

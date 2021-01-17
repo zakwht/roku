@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tvinput.hdmi1",
+    "type": "tvin",
+    "version": "1.0.0",
+    "name": "HDMI 1"
+  },
+  {
+    "id": "tvinput.hdmi2",
+    "type": "tvin",
+    "version": "1.0.0",
+    "name": "HDMI 2"
+  },
+  {
+    "id": "tvinput.hdmi3",
+    "type": "tvin",
+    "version": "1.0.0",
+    "name": "HDMI 3 (ARC)"
+  },
+  { "id": "tvinput.cvbs", "type": "tvin", "version": "1.0.0", "name": "AV" },
+  {
+    "id": "tvinput.dtv",
+    "type": "tvin",
+    "version": "1.0.0",
+    "name": "Live TV"
+  },
+  {
+    "id": 150902,
+    "type": "appl",
+    "version": "2.3.5",
+    "name": "Mirror for Roku"
+  },
+  { "id": 12, "type": "appl", "version": "5.0.98079409", "name": "Netflix" },
+  {
+    "id": 50025,
+    "type": "appl",
+    "version": "2.1.20201113",
+    "name": "Google Play Movies & TV"
+  },
+  {
+    "id": 291097,
+    "type": "appl",
+    "version": "1.10.2020110200",
+    "name": "Disney Plus"
+  },
+  { "id": 27181, "type": "appl", "version": "4.51.216", "name": "Sky News" },
+  {
+    "id": 151908,
+    "type": "appl",
+    "version": "2.9.42",
+    "name": "The Roku Channel"
+  },
+  {
+    "id": 2213,
+    "type": "appl",
+    "version": "5.4.4",
+    "name": "Roku Media Player"
+  },
+  { "id": 19977, "type": "appl", "version": "2.7.16", "name": "Spotify Music" },
+  { "id": 259870, "type": "appl", "version": "1.4.8", "name": "Global TV" },
+  { "id": 837, "type": "appl", "version": "1.0.93000110", "name": "YouTube" },
+  {
+    "id": 13,
+    "type": "appl",
+    "version": "11.4.2020092816",
+    "name": "Prime Video"
+  }
+]

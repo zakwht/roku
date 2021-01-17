@@ -1,0 +1,21 @@
+{
+  "number": 14.3,
+  "name": "getTV",
+  "type": "air-digital",
+  "user-hidden": false,
+  "active-input": true,
+  "signal-state": "valid",
+  "signal-mode": "480i",
+  "signal-quality": 20,
+  "signal-strength": -75,
+  "program-title": "Airwolf",
+  "program-description": "The team will travel all around the world in order to shut down a global crime ring.",
+  "program-ratings": "TV-14-D-V",
+  "program-analog-audio": "none",
+  "program-digital-audio": "stereo",
+  "program-audio-languages": "eng",
+  "program-audio-formats": "AC3",
+  "program-audio-language": "eng",
+  "program-audio-format": "AC3",
+  "program-has-cc": true
+}
