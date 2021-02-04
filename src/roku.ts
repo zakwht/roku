@@ -1,7 +1,7 @@
 import { Dim2Values, Dim3Values, InputOptions, Keys, LaunchOptions, MediaPlayerInfo, RokuActiveChannel, RokuApp, RokuAppInfo, RokuChannel, RokuDevice, SearchOptions, SensorType, TouchOp } from "./types";
-import fetch, {Response} from "node-fetch";
-import {xml2js as xml2js} from "xml-js";
-import { discover, parse, queryString } from "./util";
+import {xml2js} from "xml-js";
+import { Response as NodeResponse } from "node-fetch";
+import { discover, parse, queryString, fetch } from "./util";
 import {App} from "./app";
 
 export = class Roku {
@@ -11,7 +11,7 @@ export = class Roku {
 
   // instance members
   location: string; //the location
-  private queue: (() => Promise<Response>)[] = [];
+  private queue: (() => Promise<Response | NodeResponse>)[] = [];
   private processing: boolean = false;
   toString = () => `Roku (${this.location})`;
 
@@ -29,7 +29,7 @@ export = class Roku {
    * @param {string} location The URL of the device
    */
   constructor(location: string) {
-    if (!location) throw "No location provided"
+    // if (!location) throw "No location provided" // -> regex should match http://*:8060 | empty
     this.location = location;
   }
 
@@ -60,7 +60,7 @@ export = class Roku {
    */
   press = (...keys: (Keys | string)[]) => {
     keys.forEach(key => {
-      const literalKey = Object.keys(Keys).includes(key) ? key : `LIT_${key}`;
+      const literalKey = Object.keys(Keys).includes(key.toUpperCase()) ? key : `LIT_${key}`;
       this.execute(false, () => this.post(`keypress/${literalKey}`));
     })
   }
