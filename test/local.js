@@ -1,17 +1,13 @@
-import assert from "assert";
-import { Response } from "node-fetch";
-import Roku from "../src/roku";
-import { App } from "../src/app";
-import { Keys, RokuAppInfo } from "../src/types";
-import { discover } from "../src/util";
-import readline from "readline-sync";
+const assert = require("assert");
+const readline = require("readline-sync");
+const { Roku, App, Keys, discover } = require("../lib");
 
-const testRequest = (req: Promise<Response>) =>
+const testRequest = (req) =>
   req.then((res) =>
     assert.match(res.status.toString(), /2\d\d/, "Expected response status 200")
   );
 
-const visualTest = (title: string, test: () => Promise<any>) => {
+const visualTest = async (title, test) => {
   it(title, async () => await test()).timeout(10000);
   it(`(wait) ${title}`, async (done) => {
     const input = readline.question(`\t(${title}) press enter to continue: `);
@@ -20,15 +16,15 @@ const visualTest = (title: string, test: () => Promise<any>) => {
   }).timeout(30000);
 };
 
-const keyTest = (title: string, test: () => any) =>
+const keyTest = (title, test) =>
   it(title, (done) => {
     test();
     setTimeout(done, 2500);
   }).timeout(7500);
 
-let location: string;
-let roku: Roku;
-let appInfo: RokuAppInfo;
+let location;
+let roku;
+let appInfo;
 
 describe("Local", () => {
   context("Setup", () => {
@@ -56,8 +52,8 @@ describe("Local", () => {
     it("tv-channels", async () => assert.ok(await roku.channels()));
   });
 
-  context.skip("App", () => {
-    let netflix: App;
+  context("App", () => {
+    let netflix;
 
     it("instance", () => {
       netflix = new App(appInfo, roku);

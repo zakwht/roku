@@ -1,8 +1,9 @@
-import express from "express";
-import Roku from "../src/roku";
-import { readFileSync as read, existsSync as exists } from "fs";
-import { join } from "path";
-import assert from "assert";
+const assert = require("assert");
+const express = require("express");
+const fs = require("fs");
+const [read, exists] = [fs.readFileSync, fs.existsSync];
+const { Roku } = require("../lib");
+const { join } = require("path");
 
 const app = express();
 
@@ -14,12 +15,12 @@ app.get("/query/:route", (req, res) => {
 
 const server = app.listen(4060);
 
-const testEquality = (actual: any, expected: typeof actual) => {
+const testEquality = (actual, expected) => {
   typeof actual === "object"
     ? assert.deepStrictEqual(actual, expected, `${actual} != ${expected}`)
     : assert.strictEqual(actual, expected, `${actual} != ${expected}`);
 };
-const fixture = (name: string): {} => {
+const fixture = (name) => {
   const path = join(process.cwd(), `test/fixtures/${name}.json`);
   return JSON.parse(read(path, "utf8"));
 };
@@ -44,7 +45,7 @@ describe("Fixtures", () => {
   context("General", () => {
     it("toString", () => {
       testEquality(roku.toString(), "Roku (http://localhost:4060/)");
-      const netflix = roku.app(fixture("active-app") as any);
+      const netflix = roku.app(fixture("active-app"));
       testEquality(netflix.toString(), "[12] Netflix (v5.0.98079409)");
     });
   });
