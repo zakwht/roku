@@ -1,12 +1,13 @@
 {
-  "name": "roku",
-  "version": "1.0.0",
+  "name": "roku-ecp",
+  "version": "1.0.5",
   "description": "",
   "main": "./lib/index.js",
+  "files": ["lib"],
   "types": "./lib/index.d.ts",
   "scripts": {
-    "start": "tsc && node dist/src/fun.js",
-    "test": "tsc && mocha dist/test/*.js",
+    "start": "tsc && node lib/fun.js",
+    "test": "mocha test/*.js --experimental-modules",
     "prepare": "tsc"
   },
   "keywords": [],
