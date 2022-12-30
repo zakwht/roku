@@ -4,7 +4,7 @@ import { Response as NodeResponse } from "node-fetch";
 import { discover, parse, queryString, fetch } from "./util";
 import {App} from "./app";
 
-export = class Roku {
+export class Roku {
   // static members
   static discover = discover;
   static keys = Keys;

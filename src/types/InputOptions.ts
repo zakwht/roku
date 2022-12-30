@@ -14,6 +14,7 @@ export type SensorType =
   | "orientation"
   | "rotation"
   | "magnetic";
+
 export type TouchOp = "up" | "down" | "press" | "move" | "cancel";
 
 export interface InputOptions extends LaunchOptions {
