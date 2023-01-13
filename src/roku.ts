@@ -98,7 +98,7 @@ export class Roku {
   keyUp = (key: Keys) => this.post(`keyup/${key}`);
 
   /**
-   * Launches the identified channel. Can accept launch parameters for deep linking.
+   * Launches the identified app. Can accept launch parameters for deep linking.
    * @param {number} id The id of the app
    * @param {{}} options Launch parameters (for deep linking)
    */
@@ -171,7 +171,7 @@ export class Roku {
       });
 
   /**
-   * Retrieves information about the currently tuned TV channel
+   * Launches the identified channel
    * @remarks Restricted to Roku TV devices that support live TV
    * @param {number} id The channel number
    */
@@ -209,7 +209,7 @@ export class Roku {
     Object.keys(values).forEach(
       (key) => (params[`${input}.${key}`] = values[key])
     );
-    this.input(params);
+    return this.input(params);
   };
 
   /**
@@ -222,7 +222,7 @@ export class Roku {
     Object.keys(values).forEach(
       (key) => (params[`touch.0.${key}`] = values[key])
     );
-    console.log(params);
+    return this.input(params);
   };
 
   /**

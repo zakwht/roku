@@ -11,11 +11,11 @@ export interface MediaPlayerInfo {
     video_res: string;
   };
   buffering?: { current: number; max: number; target: number };
-  new_stream?: { speed: "128000 bps" };
-  position?: "6916 ms";
-  duration?: "887999 ms";
+  new_stream?: { speed: string };
+  position?: string;
+  duration?: string;
   is_live?: boolean;
-  runtime?: "887999 ms";
+  runtime?: string;
   stream_segment?: {
     bitrate: number;
     media_sequence: number;
