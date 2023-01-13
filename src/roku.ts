@@ -1,8 +1,8 @@
 import { Dim2Values, Dim3Values, InputOptions, Keys, LaunchOptions, MediaPlayerInfo, RokuActiveChannel, RokuApp, RokuAppInfo, RokuChannel, RokuDevice, SearchOptions, SensorType, TouchOp } from "./types";
-import {xml2js} from "xml-js";
+import { xml2js } from "xml-js";
 import { Response as NodeResponse } from "node-fetch";
 import { discover, parse, queryString, fetch } from "./util";
-import {App} from "./app";
+import { App } from "./app";
 
 export class Roku {
   // static members
@@ -82,7 +82,7 @@ export class Roku {
    * @param {number} id The id of the app
    * @param {{}} options Launch parameters (for deep linking)
    */
-  launch = (id: number, options?: LaunchOptions) => this.post(`launch/${id}`, options);
+  launch = (id: number | "dev", options?: LaunchOptions) => this.post(`launch/${id}`, options);
  
   /**
    * Sends custom events to the current application
