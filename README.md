@@ -1,4 +1,4 @@
-# Roku ECP TypeScript NPM Packages
+# Roku ECP TypeScript NPM Package
 
 [![Version](https://img.shields.io/npm/v/roku-ecp)](https://www.npmjs.com/package/roku-ecp)
 [![Downloads](https://img.shields.io/npm/dt/roku-ecp)](https://www.npmjs.com/package/roku-ecp)
