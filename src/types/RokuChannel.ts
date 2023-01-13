@@ -11,7 +11,7 @@ export interface RokuActiveChannel extends RokuChannel {
   "signal-mode": string;
   "signal-quality": number;
   "signal-strength": number;
-  "program-title": string; 
+  "program-title": string;
   "program-description": string;
   "program-ratings": string;
   "program-analog-audio": string;

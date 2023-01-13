@@ -1,6 +1,6 @@
 import { Client as SSDP } from "node-ssdp";
 import { SSDPDevice } from "./types";
-import nodefetch, {Response as NodeResponse} from "node-fetch";
+import nodefetch, { Response as NodeResponse } from "node-fetch";
 
 export const queryString = (params?: {}) => {
   if (!params) return "";
@@ -51,4 +51,8 @@ export const discover = (timeout: number = 10000): Promise<SSDPDevice[]> => {
   );
 };
 
-export const fetch: (url: string, o?: {method: string}) => Promise<Response | NodeResponse> = typeof window === 'undefined' ? nodefetch : window.fetch;
+export const fetch: (
+  url: string,
+  o?: { method: string }
+) => Promise<Response | NodeResponse> =
+  typeof window === "undefined" ? nodefetch : window.fetch;

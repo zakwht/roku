@@ -1,14 +1,17 @@
-import Roku from "./roku";
+import { Roku } from "./roku";
 import { InputOptions, LaunchOptions, RokuAppInfo } from "./types";
 import { queryString, fetch } from "./util";
-import {Response as NodeResponse} from "node-fetch";
+import { Response as NodeResponse } from "node-fetch";
 
-export class App {  
+export class App {
   // instance members
   appInfo: RokuAppInfo;
   private get: (path: string, params?: {}) => Promise<Response | NodeResponse>;
   private post: (path: string, params?: {}) => Promise<Response | NodeResponse>;
-  toString = () =>`[${this.appInfo.id}]${this.appInfo.name ? ` ${this.appInfo.name}` : ""}${this.appInfo.version ? ` (v${this.appInfo.version})` : ""}`
+  toString = () =>
+    `[${this.appInfo.id}]${this.appInfo.name ? ` ${this.appInfo.name}` : ""}${
+      this.appInfo.version ? ` (v${this.appInfo.version})` : ""
+    }`;
 
   /**
    * Initializes a new App given its id and parent device
@@ -17,9 +20,12 @@ export class App {
    */
   constructor(appInfo: RokuAppInfo, parent: Roku) {
     this.appInfo = appInfo;
-    this.get = (path: string, params?: {}) => 
+    this.get = (path: string, params?: {}) =>
       fetch(`${parent.location}${path}${queryString(params)}`);
-    this.post = (path: string, params?: {}) => fetch(`${parent.location}${path}${queryString(params)}`, {method: "post"});
+    this.post = (path: string, params?: {}) =>
+      fetch(`${parent.location}${path}${queryString(params)}`, {
+        method: "post"
+      });
   }
 
   /**
@@ -31,12 +37,13 @@ export class App {
    * Launches the app. Can accept launch parameters for deep linking.
    * @param {{}} options Launch parameters (for deep linking)
    */
-  launch = (options?: LaunchOptions) => this.post(`launch/${this.appInfo.id}`, options);
-  
+  launch = (options?: LaunchOptions) =>
+    this.post(`launch/${this.appInfo.id}`, options);
+
   /**
    * Exits the current channel, and launches the Channel Store details screen of the app.
    */
-  store = () => this.post("launch/11", {contentId: this.appInfo.id});
+  store = () => this.post("launch/11", { contentId: this.appInfo.id });
 
   /**
    * Exits the current channel, and launches the Channel Store details screen of the app (provided the app is not installed).

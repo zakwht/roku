@@ -7,4 +7,3 @@ export * from "./RokuChannel";
 export * from "./RokuDevice";
 export * from "./SearchOptions";
 export * from "./SSDPDevice";
-

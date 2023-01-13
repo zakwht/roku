@@ -1,4 +1,19 @@
-import { Dim2Values, Dim3Values, InputOptions, Keys, LaunchOptions, MediaPlayerInfo, RokuActiveChannel, RokuApp, RokuAppInfo, RokuChannel, RokuDevice, SearchOptions, SensorType, TouchOp } from "./types";
+import {
+  Dim2Values,
+  Dim3Values,
+  InputOptions,
+  Keys,
+  LaunchOptions,
+  MediaPlayerInfo,
+  RokuActiveChannel,
+  RokuApp,
+  RokuAppInfo,
+  RokuChannel,
+  RokuDevice,
+  SearchOptions,
+  SensorType,
+  TouchOp
+} from "./types";
 import { xml2js } from "xml-js";
 import { Response as NodeResponse } from "node-fetch";
 import { discover, parse, queryString, fetch } from "./util";
@@ -19,10 +34,12 @@ export class Roku {
   private execute = async (recursing?: boolean, cmd?: () => Promise<any>) => {
     if (cmd) this.queue.push(cmd);
     if (!recursing && this.processing) return;
-    if (!this.queue.length) return this.processing = false;
+    if (!this.queue.length) return (this.processing = false);
     this.processing = true;
-    this.queue.shift()().then(() => this.execute(true));
-  }
+    this.queue
+      .shift()()
+      .then(() => this.execute(true));
+  };
 
   /**
    * Initializes a new Roku given its location
@@ -38,7 +55,7 @@ export class Roku {
    * @param {string} path Request URL
    * @param {{}} params Request parameters
    */
-  get = (path: string, params?: {}) => 
+  get = (path: string, params?: {}) =>
     fetch(`${this.location}${path}${queryString(params)}`);
 
   /**
@@ -46,7 +63,8 @@ export class Roku {
    * @param {string} path Request URL
    * @param {{}} params Request parameters
    */
-  post = (path: string, params?: {}) => fetch(`${this.location}${path}${queryString(params)}`, {method: "post"});
+  post = (path: string, params?: {}) =>
+    fetch(`${this.location}${path}${queryString(params)}`, { method: "post" });
 
   /**
    * Enables an external client to drive the Roku Search UI to find and (optionally) launch content from an available provider.
@@ -59,11 +77,13 @@ export class Roku {
    * @param {string[]} keys A list of keys to press
    */
   press = (...keys: (Keys | string)[]) => {
-    keys.forEach(key => {
-      const literalKey = Object.keys(Keys).includes(key.toUpperCase()) ? key : `LIT_${key}`;
+    keys.forEach((key) => {
+      const literalKey = Object.keys(Keys).includes(key.toUpperCase())
+        ? key
+        : `LIT_${key}`;
       this.execute(false, () => this.post(`keypress/${literalKey}`));
-    })
-  }
+    });
+  };
 
   /**
    * Equivalent to pressing the identified remote control key
@@ -76,14 +96,15 @@ export class Roku {
    * @param {string} key Key to be released (case insensitive)
    */
   keyUp = (key: Keys) => this.post(`keyup/${key}`);
-  
+
   /**
    * Launches the identified channel. Can accept launch parameters for deep linking.
    * @param {number} id The id of the app
    * @param {{}} options Launch parameters (for deep linking)
    */
-  launch = (id: number | "dev", options?: LaunchOptions) => this.post(`launch/${id}`, options);
- 
+  launch = (id: number | "dev", options?: LaunchOptions) =>
+    this.post(`launch/${id}`, options);
+
   /**
    * Sends custom events to the current application
    * @param {{}} options Input parameters
@@ -94,51 +115,78 @@ export class Roku {
    * Retrieves information about the device
    * @returns {{}} Device details
    */
-  info = (): Promise<RokuDevice> => this.get("query/device-info").then(res => res.text()).then(xml => parse<RokuDevice>(xml2js(xml, {compact: true})["device-info"]));
-  
+  info = (): Promise<RokuDevice> =>
+    this.get("query/device-info")
+      .then((res) => res.text())
+      .then((xml) =>
+        parse<RokuDevice>(xml2js(xml, { compact: true })["device-info"])
+      );
+
   /**
    * Retrieves information about the current application
    * @returns {{}} App details
-   */ 
-  activeApp = (): Promise<RokuApp> => this.get("query/active-app").then(res => res.text()).then(xml => parse<RokuApp>(xml2js(xml, {compact: true})["active-app"]["app"]));
-  
+   */
+  activeApp = (): Promise<RokuApp> =>
+    this.get("query/active-app")
+      .then((res) => res.text())
+      .then((xml) =>
+        parse<RokuApp>(xml2js(xml, { compact: true })["active-app"]["app"])
+      );
+
   /**
    * Retrieves information about the device's applications
    * @returns {{}[]} An array of app details
    */
-  apps = (): Promise<RokuApp[]> => this.get("query/apps").then(res => res.text()).then(xml => xml2js(xml, {compact: true})["apps"]["app"].map(parse));
-  
+  apps = (): Promise<RokuApp[]> =>
+    this.get("query/apps")
+      .then((res) => res.text())
+      .then((xml) => xml2js(xml, { compact: true })["apps"]["app"].map(parse));
+
   /**
    * Retrieves information about the currently tuned TV channel
    * @remarks Restricted to Roku TV devices that support live TV
    * @returns {{}} Channel details
    */
-  activeChannel = (): Promise<RokuActiveChannel> => this.get("query/tv-active-channel").then(res => res.text()).then(xml => parse<RokuActiveChannel>(xml2js(xml, {compact: true})["tv-channel"]["channel"]));
-  
+  activeChannel = (): Promise<RokuActiveChannel> =>
+    this.get("query/tv-active-channel")
+      .then((res) => res.text())
+      .then((xml) =>
+        parse<RokuActiveChannel>(
+          xml2js(xml, { compact: true })["tv-channel"]["channel"]
+        )
+      );
+
   /**
    * Retrieves information about the TV channel / line-up available for viewing in the TV tuner UI
    * @remarks Restricted to Roku TV devices that support live TV
    * @returns {{}[]} An array of channel details
    */
-  channels = (): Promise<RokuChannel[]> => this.get("query/tv-channels").then(res => res.text()).then(xml => {
-    const parsed = xml2js(xml, {compact: true})["tv-channels"];
-    if (parsed["channel"]) return parsed["channel"].map(parse);
-    return [];
-  })
+  channels = (): Promise<RokuChannel[]> =>
+    this.get("query/tv-channels")
+      .then((res) => res.text())
+      .then((xml) => {
+        const parsed = xml2js(xml, { compact: true })["tv-channels"];
+        if (parsed["channel"]) return parsed["channel"].map(parse);
+        return [];
+      });
 
   /**
    * Retrieves information about the currently tuned TV channel
    * @remarks Restricted to Roku TV devices that support live TV
    * @param {number} id The channel number
    */
-  launchChannel = (id: number) => this.post("launch/tvinput.dtv", {ch: id});
+  launchChannel = (id: number) => this.post("launch/tvinput.dtv", { ch: id });
 
   /**
    * Wait between key presses
    * @param {number} ms Delay time in milliseconds
    */
-  wait = (ms: number) => this.execute(false, () => new Promise((resolve) => setTimeout(resolve, ms)))
-  
+  wait = (ms: number) =>
+    this.execute(
+      false,
+      () => new Promise((resolve) => setTimeout(resolve, ms))
+    );
+
   /**
    * Exits the current channel, and launches the Channel Store details screen of the identified app.
    * @param {number} id The id of the app
@@ -149,8 +197,8 @@ export class Roku {
    * Types alphanumeric characters, provided a keyboard screen is active
    * @param {string} input Text to be typed
    */
-  type = (input: string) => input.split("").forEach(char => this.press(char));
-  
+  type = (input: string) => input.split("").forEach((char) => this.press(char));
+
   /**
    * Sends custom sensor events to the device
    * @param {"acceleration" | "orientation" | "rotation" | "magnetic"} input The sensor type
@@ -158,9 +206,11 @@ export class Roku {
    */
   sensor = (input: SensorType, values: Dim3Values) => {
     const params = {};
-    Object.keys(values).forEach(key => params[`${input}.${key}`] = values[key]);
+    Object.keys(values).forEach(
+      (key) => (params[`${input}.${key}`] = values[key])
+    );
     this.input(params);
-  }
+  };
 
   /**
    * Sends custom touch or multi-touch events to the device
@@ -168,10 +218,12 @@ export class Roku {
    * @param {"up" | "down" | "press" | "move" | "cancel"} op The touch operation
    */
   touch = (values: Dim2Values, op?: TouchOp) => {
-    const params = op ? {"touch.0.op": op} : {};
-    Object.keys(values).forEach(key => params[`touch.0.${key}`] = values[key]);
+    const params = op ? { "touch.0.op": op } : {};
+    Object.keys(values).forEach(
+      (key) => (params[`touch.0.${key}`] = values[key])
+    );
     console.log(params);
-  }
+  };
 
   /**
    * Creates a new instance of the `App` class
@@ -190,6 +242,8 @@ export class Roku {
    * Retrieves information about the current stream segment and position of the content being played, the running time of the content, audio format, and buffering
    * @returns {{}} Media player details
    */
-  mediaPlayer = (): Promise<MediaPlayerInfo> => this.get("query/media-player").then(res => res.text()).then(xml => parse(xml2js(xml, {compact: true})["player"]));  
+  mediaPlayer = (): Promise<MediaPlayerInfo> =>
+    this.get("query/media-player")
+      .then((res) => res.text())
+      .then((xml) => parse(xml2js(xml, { compact: true })["player"]));
 }
-
