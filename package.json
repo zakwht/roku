@@ -12,8 +12,19 @@
     "test": "mocha test/*.js --experimental-modules",
     "prepare": "tsc"
   },
-  "keywords": [],
-  "author": "",
+  "exports": "./lib/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "keywords": [
+    "roku",
+    "ecp",
+    "typescript"
+  ],
+  "author": {
+    "name": "Zak White",
+    "url": "https://github.com/zakwht"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.9",
@@ -32,5 +43,10 @@
     "node-ssdp": "^4.0.1",
     "@types/node-fetch": "^2.5.7",
     "xml-js": "^1.6.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zakwht/roku"
+  },
+  "homepage": "https://github.com/zakwht/roku"
 }

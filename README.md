@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/zakwht/roku?color=089)](./LICENSE)
 [![Style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
 
-Some description, overview, use
+A Node package designed to control Roku Devices using TypeScript! Compatible with NodeJS and browsers.
 
 ### Getting started
 ```
