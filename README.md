@@ -12,7 +12,7 @@ A Node package designed to control Roku Devices using TypeScript! Compatible wit
 ```
 $ npm install --save roku-ecp
 ```
-See docs for [setup](https://github.com/zakwht/roku/docs/setup.md) & [class API](https://github.com/zakwht/roku/docs/api.md).
+See docs for [setup](https://github.com/zakwht/roku/blob/main/docs/setup.md) & [class API](https://github.com/zakwht/roku/blob/main/docs/api.md).
 
 ### Acknowledgments
 * __Developed as an wrapper for__ the [Roku External Control Protocol](https://developer.roku.com/en-ca/docs/developer-program/debugging/external-control-api.md) API
