@@ -1,13 +1,12 @@
 import { Roku } from "./roku";
 import { InputOptions, LaunchOptions, RokuAppInfo } from "./types";
-import { queryString, fetch } from "./util";
-import { Response as NodeResponse } from "node-fetch";
+import { queryString } from "./util";
 
 export class App {
   // instance members
   appInfo: RokuAppInfo;
-  private get: (path: string, params?: {}) => Promise<Response | NodeResponse>;
-  private post: (path: string, params?: {}) => Promise<Response | NodeResponse>;
+  private get: (path: string, params?: {}) => Promise<Response>;
+  private post: (path: string, params?: {}) => Promise<Response>;
   toString = () =>
     `[${this.appInfo.id}]${this.appInfo.name ? ` ${this.appInfo.name}` : ""}${
       this.appInfo.version ? ` (v${this.appInfo.version})` : ""

@@ -15,8 +15,7 @@ import {
   TouchOp
 } from "./types";
 import { xml2js } from "xml-js";
-import { Response as NodeResponse } from "node-fetch";
-import { discover, parse, queryString, fetch } from "./util";
+import { discover, parse, queryString } from "./util";
 import { App } from "./app";
 
 export class Roku {
@@ -26,7 +25,7 @@ export class Roku {
 
   // instance members
   location: string; //the location
-  private queue: (() => Promise<Response | NodeResponse>)[] = [];
+  private queue: (() => Promise<Response>)[] = [];
   private processing: boolean = false;
   toString = () => `Roku (${this.location})`;
 
