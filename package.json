@@ -8,7 +8,7 @@
   ],
   "types": "./lib/index.d.ts",
   "scripts": {
-    "start": "tsc && node lib/fun.js",
+    "start": "tsc && node repl.js",
     "test": "mocha test/*.js --experimental-modules",
     "prepare": "tsc"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/express": "4.17.9",
     "@types/mocha": "8.2.0",
+    "@types/node": "18.13.0",
     "@types/node-ssdp": "3.3.1",
     "@types/readline-sync": "1.4.3",
     "@types/xml-js": "1.0.0",
