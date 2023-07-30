@@ -15,12 +15,11 @@ import {
   TouchOp
 } from "./types";
 import { xml2js } from "xml-js";
-import { discover, parse, queryString } from "./util";
+import { parse, queryString } from "./util";
 import { App } from "./app";
 
 export class Roku {
   // static members
-  static discover = discover;
   static keys = Keys;
 
   // instance members

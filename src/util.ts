@@ -1,6 +1,3 @@
-import { Client as SSDP } from "node-ssdp";
-import { SSDPDevice } from "./types";
-
 export const queryString = (params?: {}) => {
   if (!params) return "";
   return (
@@ -33,19 +30,3 @@ const cast = (val: string): string | boolean | number => {
   return val;
 };
 
-export const discover = (timeout: number = 10000): Promise<SSDPDevice[]> => {
-  const ssdp = new SSDP();
-  const devices: SSDPDevice[] = [];
-
-  ssdp.on("response", (headers, _, rinfo) =>
-    devices.push({ ...rinfo, usn: headers.USN, location: headers.LOCATION })
-  );
-  ssdp.search("roku:ecp");
-
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(devices);
-      ssdp.stop();
-    }, timeout)
-  );
-};

@@ -1,6 +1,6 @@
 const assert = require("assert");
 const readline = require("readline-sync");
-const { Roku, App, Keys, discover } = require("../lib");
+const { Roku, App, Keys } = require("../lib");
 
 const testRequest = (req) =>
   req.then((res) =>
@@ -27,18 +27,6 @@ let roku;
 let appInfo;
 
 describe("Local", () => {
-  context("Setup", () => {
-    it("discovery", async () => {
-      const device = (await discover(3000))[0];
-      ["address", "family", "port", "size", "usn", "location"].forEach((key) =>
-        assert.ok(device[key])
-      );
-      location = device.location;
-    }).timeout(5000);
-
-    it("instance", () => (roku = new Roku(location)));
-  });
-
   context("Query", () => {
     it("active-app", async () => assert.ok(await roku.activeApp()));
     it("apps", async () => {
